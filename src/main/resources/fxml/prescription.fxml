@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.healthdesk.controller.PrescriptionController"
+      spacing="16" style="-fx-padding: 20px;">
+
+    <!-- TOP FILTER BAR -->
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 10px 16px;">
+        <Label text="Filter by Patient:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <TextField fx:id="filterField" promptText="Enter patient name..." prefWidth="260" onKeyReleased="#handleFilter"/>
+        <Button text="🔄 Refresh" onAction="#loadPrescriptions" styleClass="btn-secondary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="📄 View / Print Selected Prescription" onAction="#handleViewPrescriptionDialog" styleClass="btn-secondary"/>
+    </HBox>
+
+    <!-- MAIN BODY: PRESCRIPTIONS TABLE + MULTI-MEDICINE BUILDER -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- PRESCRIPTIONS LIST TABLE -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <Label text="Clinical Prescriptions Registry" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+            <TableView fx:id="prescriptionTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="45"/>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="85"/>
+                    <TableColumn fx:id="colPatient" text="Patient" prefWidth="130"/>
+                    <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="130"/>
+                    <TableColumn fx:id="colMedicine" text="Medicine" prefWidth="120"/>
+                    <TableColumn fx:id="colDosage" text="Dosage" prefWidth="80"/>
+                    <TableColumn fx:id="colDuration" text="Duration" prefWidth="80"/>
+                    <TableColumn fx:id="colInstructions" text="Instructions" prefWidth="160"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+
+        <!-- MULTI-MEDICINE PRESCRIPTION BUILDER -->
+        <VBox prefWidth="400" styleClass="card" spacing="12">
+            <Label text="Write New Prescription" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+            <Separator/>
+
+            <!-- Patient & Doctor Selection -->
+            <VBox spacing="4">
+                <Label text="Patient *" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                <ComboBox fx:id="patientCombo" maxWidth="Infinity" promptText="Select patient..."/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Prescribing Doctor *" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                <ComboBox fx:id="doctorCombo" maxWidth="Infinity" promptText="Select doctor..."/>
+            </VBox>
+
+            <Separator/>
+            <Label text="Add Medicines:" style="-fx-font-weight: bold; -fx-text-fill: #0284c7; -fx-font-size: 12px;"/>
+
+            <HBox spacing="8">
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Medicine *" style="-fx-font-size: 11px;"/>
+                    <TextField fx:id="medicineField" promptText="e.g. Paracetamol"/>
+                </VBox>
+                <VBox spacing="2" prefWidth="110">
+                    <Label text="Dosage *" style="-fx-font-size: 11px;"/>
+                    <TextField fx:id="dosageField" promptText="e.g. 500 mg"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="8">
+                <VBox spacing="2" prefWidth="130">
+                    <Label text="Duration *" style="-fx-font-size: 11px;"/>
+                    <TextField fx:id="durationField" promptText="e.g. 5 days"/>
+                </VBox>
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Instructions" style="-fx-font-size: 11px;"/>
+                    <TextField fx:id="instructionsField" promptText="After meals, 3 times daily"/>
+                </VBox>
+            </HBox>
+
+            <Button text="➕ Add Medicine to Prescription" onAction="#handleAddMedicineItem" maxWidth="Infinity" styleClass="btn-secondary"/>
+
+            <!-- Current Medicine Items List -->
+            <VBox spacing="4" VBox.vgrow="ALWAYS">
+                <Label text="Current Medicines in Prescription:" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                <ListView fx:id="currentMedicineListView" prefHeight="100"/>
+            </VBox>
+
+            <!-- Save All -->
+            <Button text="💾 Save Complete Prescription" onAction="#handleSavePrescription" maxWidth="Infinity"
+                    styleClass="btn-primary" style="-fx-font-size: 13px; -fx-padding: 9px;"/>
+
+            <Button text="🧹 Clear Builder" onAction="#handleClearBuilder" maxWidth="Infinity" styleClass="btn-secondary"/>
+        </VBox>
+
+    </HBox>
+</VBox>

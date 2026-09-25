@@ -261,4 +261,38 @@ public class Database {
                     "(3, 400.0, 200.0, 0.0, 150.0, 0.0, 750.0, '" + today + "', 'Paid');");
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println("==================================================");
+        System.out.println("  HealthDesk Database Initializer & Verification  ");
+        System.out.println("==================================================");
+        initialize();
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
+            printCount(stmt, "User");
+            printCount(stmt, "Doctor");
+            printCount(stmt, "Patient");
+            printCount(stmt, "Bed");
+            printCount(stmt, "Appointment");
+            printCount(stmt, "EmergencyQueue");
+            printCount(stmt, "LabTest");
+            printCount(stmt, "Prescription");
+            printCount(stmt, "Bill");
+        } catch (SQLException e) {
+            System.err.println("Verification error: " + e.getMessage());
+        }
+        System.out.println("==================================================");
+        System.out.println("  Database verification completed successfully!   ");
+        System.out.println("==================================================");
+    }
+
+    private static void printCount(Statement stmt, String tableName) {
+        try (var rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + ";")) {
+            if (rs.next()) {
+                System.out.printf("  Table: %-16s | Records: %d\n", tableName, rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            System.out.printf("  Table: %-16s | Error: %s\n", tableName, e.getMessage());
+        }
+    }
 }
+

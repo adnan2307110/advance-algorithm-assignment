@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.healthdesk.controller.LabController"
+      spacing="16" style="-fx-padding: 20px;">
+
+    <!-- TOP FILTER & SIMULATION EXPLANATION BANNER -->
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 10px 16px;">
+        <Label text="Filter Tests:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <ComboBox fx:id="statusFilterCombo" prefWidth="160" onAction="#handleFilter"/>
+        <Button text="🔄 Refresh" onAction="#loadTests" styleClass="btn-secondary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="labStatsLabel" text="Pending Tests: 0 | Completed: 0" style="-fx-font-weight: bold; -fx-text-fill: #0284c7;"/>
+    </HBox>
+
+    <!-- MAIN BODY: TESTS TABLE + DUAL ACTION PANELS -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- LABORATORY TESTS TABLE -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <Label text="Laboratory Diagnostic Orders" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+            <TableView fx:id="labTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="45"/>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="85"/>
+                    <TableColumn fx:id="colPatient" text="Patient" prefWidth="130"/>
+                    <TableColumn fx:id="colDoctor" text="Doctor" prefWidth="130"/>
+                    <TableColumn fx:id="colTestName" text="Diagnostic Test" prefWidth="140"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+                    <TableColumn fx:id="colResult" text="Clinical Result" prefWidth="180"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+
+        <!-- RIGHT PANEL: DOCTOR REQUEST & TECHNICIAN RESULTS -->
+        <VBox prefWidth="380" spacing="14">
+
+            <!-- 1. DOCTOR REQUEST BOX -->
+            <VBox styleClass="card" spacing="10">
+                <Label text="🩺 Doctor: Request Test" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                <Separator/>
+
+                <VBox spacing="4">
+                    <Label text="Patient *" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                    <ComboBox fx:id="patientCombo" maxWidth="Infinity" promptText="Select patient..."/>
+                </VBox>
+
+                <VBox spacing="4">
+                    <Label text="Ordering Doctor *" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                    <ComboBox fx:id="doctorCombo" maxWidth="Infinity" promptText="Select doctor..."/>
+                </VBox>
+
+                <VBox spacing="4">
+                    <Label text="Diagnostic Test *" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                    <ComboBox fx:id="testNameCombo" maxWidth="Infinity" editable="true" promptText="Select or enter test..."/>
+                </VBox>
+
+                <Button text="🔬 Request Laboratory Test" onAction="#handleRequestTest" maxWidth="Infinity" styleClass="btn-primary"/>
+            </VBox>
+
+            <!-- 2. LAB TECHNICIAN PROCESSING BOX -->
+            <VBox styleClass="card" spacing="10" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="6">
+                    <Label text="🧪 Technician: Results &amp; Simulation" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ProgressIndicator fx:id="progressIndicator" prefWidth="20" prefHeight="20" visible="false"/>
+                </HBox>
+                <Separator/>
+
+                <Label fx:id="lblSelectedTestInfo" text="Selected Test: None" style="-fx-font-weight: bold; -fx-text-fill: #0284c7; -fx-font-size: 12px;"/>
+
+                <!-- Multithreading Simulation Button -->
+                <Button fx:id="btnSimulateProcessing" text="⚡ Run Multithreaded Analysis" onAction="#handleRunSimulation"
+                        maxWidth="Infinity" styleClass="btn-secondary"
+                        style="-fx-background-color: #f0fdf4; -fx-border-color: #86efac; -fx-text-fill: #166534; -fx-font-weight: bold;"/>
+
+                <VBox spacing="4" VBox.vgrow="ALWAYS">
+                    <Label text="Enter / Edit Diagnostic Results:" style="-fx-font-size: 11px; -fx-font-weight: 600;"/>
+                    <TextArea fx:id="resultArea" promptText="Enter lab findings, parameters, normal reference values..." prefRowCount="5" wrapText="true" VBox.vgrow="ALWAYS"/>
+                </VBox>
+
+                <Button text="💾 Save Result &amp; Mark Completed" onAction="#handleSaveManualResult" maxWidth="Infinity" styleClass="btn-success"/>
+            </VBox>
+
+        </VBox>
+
+    </HBox>
+</VBox>

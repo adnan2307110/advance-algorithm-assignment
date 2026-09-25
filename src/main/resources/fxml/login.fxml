@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.healthdesk.controller.LoginController"
+           style="-fx-background-color: linear-gradient(to bottom right, #0f172a, #1e293b, #0369a1);">
+
+    <VBox alignment="CENTER" maxWidth="450" spacing="20" styleClass="card"
+          style="-fx-background-color: #ffffff; -fx-background-radius: 16px; -fx-padding: 36px 32px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.35), 24, 0, 0, 10);">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="6">
+            <Label text="HEALTHDESK" style="-fx-font-size: 26px; -fx-font-weight: 800; -fx-text-fill: #0284c7;"/>
+            <Label text="Integrated Healthcare Management System" style="-fx-font-size: 13px; -fx-text-fill: #64748b;"/>
+        </VBox>
+
+        <Separator prefWidth="380"/>
+
+        <!-- Form fields -->
+        <VBox spacing="14" alignment="CENTER_LEFT">
+            <VBox spacing="4">
+                <Label text="Username" style="-fx-font-weight: 600; -fx-text-fill: #334155;"/>
+                <TextField fx:id="usernameField" promptText="Enter your username" prefHeight="38" style="-fx-font-size: 14px;"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Password" style="-fx-font-weight: 600; -fx-text-fill: #334155;"/>
+                <PasswordField fx:id="passwordField" promptText="Enter your password" prefHeight="38" style="-fx-font-size: 14px;"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Role" style="-fx-font-weight: 600; -fx-text-fill: #334155;"/>
+                <ComboBox fx:id="roleComboBox" prefWidth="400" prefHeight="38" style="-fx-font-size: 14px;"/>
+            </VBox>
+
+            <Label fx:id="errorLabel" text="" textFill="#dc2626" style="-fx-font-weight: bold; -fx-font-size: 12px;" visible="false" wrapText="true"/>
+        </VBox>
+
+        <!-- Login Button -->
+        <Button fx:id="loginButton" text="LOGIN" onAction="#handleLogin" prefWidth="400" prefHeight="42"
+                styleClass="btn-primary" style="-fx-font-size: 14px; -fx-background-radius: 8px;"/>
+
+        <!-- Quick Demo Credentials for Viva / Demo -->
+        <VBox spacing="8" alignment="CENTER" style="-fx-background-color: #f8fafc; -fx-padding: 10px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+            <Label text="Quick Demo Credentials:" style="-fx-font-size: 11px; -fx-text-fill: #64748b; -fx-font-weight: bold;"/>
+            <HBox spacing="6" alignment="CENTER">
+                <Button text="Admin" onAction="#fillAdmin" styleClass="btn-secondary" style="-fx-font-size: 11px; -fx-padding: 4px 8px;"/>
+                <Button text="Receptionist" onAction="#fillReceptionist" styleClass="btn-secondary" style="-fx-font-size: 11px; -fx-padding: 4px 8px;"/>
+                <Button text="Doctor" onAction="#fillDoctor" styleClass="btn-secondary" style="-fx-font-size: 11px; -fx-padding: 4px 8px;"/>
+                <Button text="Lab Tech" onAction="#fillLab" styleClass="btn-secondary" style="-fx-font-size: 11px; -fx-padding: 4px 8px;"/>
+            </HBox>
+        </VBox>
+
+    </VBox>
+</StackPane>

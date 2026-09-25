@@ -150,4 +150,24 @@ public class HealthAPI {
                 "  ]\n" +
                 "}";
     }
+
+    public static void main(String[] args) {
+        System.out.println("==================================================");
+        System.out.println("   Testing HealthAPI HTTP & JSON Integration      ");
+        System.out.println("==================================================");
+        HealthAPI api = new HealthAPI();
+        try {
+            System.out.println("Fetching health topics asynchronously...");
+            List<HealthInfo> list = api.fetchHealthInfoAsync().get();
+            System.out.println("Successfully fetched " + list.size() + " topics:");
+            for (HealthInfo hi : list) {
+                System.out.printf("  * %-26s | Range: %-28s | Category: %s\n",
+                        hi.getName(), hi.getNormalRange(), hi.getCategory());
+            }
+        } catch (Exception e) {
+            System.err.println("API test error: " + e.getMessage());
+        }
+        System.out.println("==================================================");
+    }
 }
+

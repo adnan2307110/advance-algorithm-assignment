@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.healthdesk.controller.BedController"
+      spacing="16" style="-fx-padding: 20px;">
+
+    <!-- TOP SUMMARY STATS -->
+    <GridPane hgap="16" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+        </columnConstraints>
+
+        <VBox GridPane.columnIndex="0" styleClass="stat-card" spacing="4">
+            <Label text="TOTAL BEDS" styleClass="stat-card-title"/>
+            <Label fx:id="lblTotalBeds" text="0" styleClass="stat-card-value"/>
+            <Label text="Across all hospital wards" styleClass="stat-card-subtitle"/>
+        </VBox>
+
+        <VBox GridPane.columnIndex="1" styleClass="stat-card" spacing="4">
+            <Label text="AVAILABLE BEDS" styleClass="stat-card-title"/>
+            <Label fx:id="lblAvailableBeds" text="0" styleClass="stat-card-value" style="-fx-text-fill: #16a34a;"/>
+            <Label text="Ready for immediate admission" styleClass="stat-card-subtitle"/>
+        </VBox>
+
+        <VBox GridPane.columnIndex="2" styleClass="stat-card" spacing="4">
+            <Label text="OCCUPIED BEDS" styleClass="stat-card-title"/>
+            <Label fx:id="lblOccupiedBeds" text="0" styleClass="stat-card-value" style="-fx-text-fill: #dc2626;"/>
+            <Label text="Currently assigned to inpatients" styleClass="stat-card-subtitle"/>
+        </VBox>
+
+        <VBox GridPane.columnIndex="3" styleClass="stat-card" spacing="4">
+            <Label text="MAINTENANCE" styleClass="stat-card-title"/>
+            <Label fx:id="lblMaintenanceBeds" text="0" styleClass="stat-card-value" style="-fx-text-fill: #d97706;"/>
+            <Label text="Under sanitation / repairs" styleClass="stat-card-subtitle"/>
+        </VBox>
+    </GridPane>
+
+    <!-- FILTER BAR -->
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 10px 16px;">
+        <Label text="Filter Ward:" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="wardFilterCombo" prefWidth="160" onAction="#handleFilter"/>
+
+        <Label text="Status:" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="statusFilterCombo" prefWidth="160" onAction="#handleFilter"/>
+
+        <Button text="🔄 Refresh" onAction="#handleRefresh" styleClass="btn-secondary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕ Add New Bed" onAction="#handleAddNewBedDialog" styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- MAIN BODY: BEDS TABLE + ASSIGNMENT / RELEASE PANEL -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- BEDS TABLEVIEW -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <Label text="Hospital Ward Beds" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+            <TableView fx:id="bedTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colBedId" text="Bed ID" prefWidth="90"/>
+                    <TableColumn fx:id="colWard" text="Ward" prefWidth="130"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                    <TableColumn fx:id="colPatient" text="Assigned Inpatient" prefWidth="200"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+
+        <!-- BED OPERATION ACTIONS -->
+        <VBox prefWidth="360" styleClass="card" spacing="14">
+            <Label text="Bed Operations" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+            <Separator/>
+
+            <!-- Selected Bed Info -->
+            <VBox spacing="6" style="-fx-background-color: #f8fafc; -fx-padding: 12px; -fx-background-radius: 8px; -fx-border-color: #e2e8f0; -fx-border-radius: 8px;">
+                <Label text="Selected Bed Details:" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #475569;"/>
+                <Label fx:id="lblSelectedBedId" text="Bed: None Selected" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0284c7;"/>
+                <Label fx:id="lblSelectedBedWard" text="Ward: -" style="-fx-text-fill: #64748b;"/>
+                <Label fx:id="lblSelectedBedStatus" text="Status: -" style="-fx-text-fill: #64748b;"/>
+                <Label fx:id="lblSelectedPatient" text="Patient: None" style="-fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <!-- Assign to Patient -->
+            <VBox spacing="6">
+                <Label text="Assign to Patient" style="-fx-font-weight: 600;"/>
+                <ComboBox fx:id="patientCombo" maxWidth="Infinity" promptText="Choose patient to admit..."/>
+                <Button text="🛏️ Assign Bed" onAction="#handleAssignBed" maxWidth="Infinity" styleClass="btn-primary"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Release Bed -->
+            <VBox spacing="6">
+                <Label text="Discharge / Free Bed" style="-fx-font-weight: 600;"/>
+                <Button text="🔓 Release Bed (Discharge)" onAction="#handleReleaseBed" maxWidth="Infinity" styleClass="btn-success"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Maintenance Toggle -->
+            <VBox spacing="6">
+                <Label text="Maintenance &amp; Sanitation" style="-fx-font-weight: 600;"/>
+                <Button text="🛠️ Toggle Maintenance" onAction="#handleToggleMaintenance" maxWidth="Infinity" styleClass="btn-secondary"/>
+            </VBox>
+        </VBox>
+
+    </HBox>
+</VBox>

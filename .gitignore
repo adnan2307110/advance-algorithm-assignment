@@ -2,6 +2,7 @@
 target/
 *.jar
 *.war
+dependency-reduced-pom.xml
 
 # Build tools & caches
 maven-dist/
