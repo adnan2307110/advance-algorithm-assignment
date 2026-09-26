@@ -12,69 +12,69 @@
     <!-- LEFT SIDEBAR -->
     <left>
         <VBox styleClass="sidebar" prefWidth="240.0" spacing="4">
-            <!-- Brand -->
-            <VBox styleClass="brand-box" spacing="2">
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="🏥" style="-fx-font-size: 22px;"/>
+            <!-- Brand Identity -->
+            <VBox styleClass="brand-box" spacing="3">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🏥" style="-fx-font-size: 24px;"/>
                     <VBox>
                         <Label text="HEALTHDESK" styleClass="brand-title"/>
-                        <Label text="Healthcare Management" styleClass="brand-subtitle"/>
+                        <Label text="Clinical Management Suite" styleClass="brand-subtitle"/>
                     </VBox>
                 </HBox>
             </VBox>
 
-            <!-- Navigation Menu Items -->
+            <!-- Primary Navigation -->
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS"
                         style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
-                <VBox spacing="4" style="-fx-padding: 8px 0;">
-                    <Button fx:id="btnDashboard" text="📊   Dashboard" onAction="#showDashboard" maxWidth="Infinity" styleClass="nav-btn, nav-btn-active"/>
-                    <Button fx:id="btnPatients" text="👥   Patients" onAction="#showPatients" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnDoctors" text="👨‍⚕️   Doctors" onAction="#showDoctors" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnAppointments" text="📅   Appointments" onAction="#showAppointments" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnEmergency" text="🚨   Emergency Queue" onAction="#showEmergency" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnBeds" text="🛏️   Bed Management" onAction="#showBeds" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnLab" text="🔬   Laboratory" onAction="#showLaboratory" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnPrescriptions" text="💊   Prescriptions" onAction="#showPrescriptions" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnBilling" text="💵   Billing" onAction="#showBilling" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnHistory" text="📋   Patient History" onAction="#showHistory" maxWidth="Infinity" styleClass="nav-btn"/>
-                    <Button fx:id="btnHealthInfo" text="ℹ️   Health Info (API)" onAction="#showHealthInfo" maxWidth="Infinity" styleClass="nav-btn"/>
+                <VBox spacing="3" style="-fx-padding: 10px 0;">
+                    <Button fx:id="btnDashboard"     text="📊   Overview &amp; Dashboard"  onAction="#showDashboard"    maxWidth="Infinity" styleClass="nav-btn, nav-btn-active"/>
+                    <Button fx:id="btnPatients"      text="👥   Patient Registry"          onAction="#showPatients"     maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnDoctors"       text="👨‍⚕️   Medical Staff"             onAction="#showDoctors"      maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnAppointments"  text="📅   Appointments"              onAction="#showAppointments" maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnEmergency"     text="🚨   Emergency Triage"          onAction="#showEmergency"   maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnBeds"          text="🛏️   Ward &amp; Bed Management"  onAction="#showBeds"        maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnLab"           text="🔬   Diagnostics &amp; Lab"      onAction="#showLaboratory"  maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnPrescriptions" text="💊   Prescriptions"             onAction="#showPrescriptions" maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnBilling"       text="💳   Billing &amp; Invoices"     onAction="#showBilling"     maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnHistory"       text="📋   Clinical History"          onAction="#showHistory"     maxWidth="Infinity" styleClass="nav-btn"/>
+                    <Button fx:id="btnHealthInfo"    text="🌐   Health Reference API"      onAction="#showHealthInfo"  maxWidth="Infinity" styleClass="nav-btn"/>
                 </VBox>
             </ScrollPane>
 
-            <!-- User Profile Box -->
+            <!-- Active User Profile -->
             <VBox styleClass="user-profile-box" spacing="6">
-                <HBox spacing="8" alignment="CENTER_LEFT">
+                <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label text="👤" style="-fx-font-size: 20px;"/>
                     <VBox spacing="2">
-                        <Label fx:id="userFullNameLabel" text="User Name" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 12px;"/>
-                        <Label fx:id="userRoleBadge" text="Admin" styleClass="badge-role"/>
+                        <Label fx:id="userFullNameLabel" text="Clinician Name" style="-fx-text-fill: #e2f0fb; -fx-font-weight: bold; -fx-font-size: 12px;"/>
+                        <Label fx:id="userRoleBadge" text="Role" styleClass="badge-role"/>
                     </VBox>
                 </HBox>
-                <Button text="🚪   Sign Out" onAction="#handleLogout" maxWidth="Infinity"
-                        style="-fx-background-color: #334155; -fx-text-fill: #f87171; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 6px; -fx-cursor: hand;"/>
+                <Button text="⬡   Sign Out Securely" onAction="#handleLogout" maxWidth="Infinity"
+                        style="-fx-background-color: rgba(220,38,38,0.18); -fx-text-fill: #fca5a5; -fx-font-weight: bold; -fx-background-radius: 7px; -fx-padding: 7px; -fx-cursor: hand; -fx-border-color: rgba(220,38,38,0.3); -fx-border-radius: 7px; -fx-border-width: 1;"/>
             </VBox>
         </VBox>
     </left>
 
-    <!-- CENTER AREA -->
+    <!-- CENTER CONTENT AREA -->
     <center>
         <BorderPane>
             <!-- TOP APP HEADER -->
             <top>
                 <HBox styleClass="top-header" spacing="16" alignment="CENTER_LEFT">
-                    <Label fx:id="pageTitleLabel" text="Dashboard Overview" styleClass="header-title"/>
+                    <Label fx:id="pageTitleLabel" text="Clinical Overview" styleClass="header-title"/>
                     <Region HBox.hgrow="ALWAYS"/>
 
-                    <!-- Notification Bell & Counter -->
-                    <Button fx:id="btnNotifications" text="🔔 Notifications (0)" onAction="#showNotificationsDialog"
-                            style="-fx-background-color: #f1f5f9; -fx-text-fill: #0369a1; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 6px 14px; -fx-cursor: hand;"/>
+                    <!-- Notification Bell -->
+                    <Button fx:id="btnNotifications" text="🔔  Alerts &amp; Reminders (0)" onAction="#showNotificationsDialog"
+                            style="-fx-background-color: #e8f4ff; -fx-text-fill: #034e81; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 6px 16px; -fx-cursor: hand; -fx-border-color: #b0d4f0; -fx-border-width: 1; -fx-border-radius: 20px;"/>
 
-                    <!-- Date display -->
-                    <Label fx:id="headerDateLabel" text="2026-09-25" style="-fx-text-fill: #64748b; -fx-font-weight: 500;"/>
+                    <!-- Live Date -->
+                    <Label fx:id="headerDateLabel" text="2026-09-27" style="-fx-text-fill: #5d7a95; -fx-font-weight: 600; -fx-font-size: 12px;"/>
                 </HBox>
             </top>
 
-            <!-- DYNAMIC CONTENT PANE -->
+            <!-- DYNAMIC VIEW PANE -->
             <center>
                 <StackPane fx:id="contentArea" styleClass="content-area"/>
             </center>
